@@ -1,31 +1,60 @@
 # === Основные настройки ===
-model = "gpt-5-codex"
+# model: имя используемой модели (например, gpt-5-codex, gpt-4.5-codex, o3 и т.д.)
+model = "gpt-5.1-codex"
+# model_reasoning_effort: уровень "усилий" модели — low, medium, high
 model_reasoning_effort = "medium"
+# max_tokens: максимальная длина ответа агента (целое число)
 max_tokens = 600                     # ограничь длину ответа (~экономит 50–80%)
+# temperature: степень креативности (0.0–2.0; чем выше — тем больше вариативность)
 temperature = 0.1                    # стабильно и без болтовни
+# top_p: срез вероятностей для nucleus sampling (0.0–1.0)
 top_p = 1.0
+# stream: включить потоковый вывод токенов (true/false)
 stream = true                        # потоковый вывод — меньше таймаутов и "повторных" токенов
+# timeout: таймаут в секундах на ответ модели
 timeout = 90                         # не держим соединение вечно
+# retries: число автоматических повторов запроса при ошибках
 retries = 2                          # повторить максимум 2 раза при сбое
+# sandbox: read-only (только читать), workspace-write (читать и писать в рабочей директории), danger-full-access (полный доступ)
+sandbox = "danger-full-access"
+# approval_policy: untrusted (всегда спрашивать), on-request (агент решает сам), on-failure (спросить при ошибке), never (никогда не спрашивать)
+approval_policy = "untrusted"
 
 # === Экономия токенов ===
+# compress_prompts: сжимать ли подсказки (true/false, если CLI поддерживает)
 compress_prompts = true              # если CLI поддерживает — уменьшает длину prompt'а
+# context_window: максимальное число токенов истории в памяти
 context_window = 4000                # ограничиваем историю чата
+# trim_history: удалять ли старые сообщения при переполнении окна (true/false)
 trim_history = true                  # удаляем старые сообщения, если переполняется окно
 
 # === Логирование / кэш ===
+# enable_cache: включить использование локального кэша ответов (true/false)
 enable_cache = true
+# cache_path: путь до директории кэша (можно указать произвольную папку)
 cache_path = "~/.codex_cache"
+# cache_ttl_hours: срок жизни кэша в часах (число)
 cache_ttl_hours = 48                 # повторные запросы не тратят токены
 
 # === Безопасные лимиты ===
+# soft_limit_usd: порог предупреждения о тратах (число в долларах)
 soft_limit_usd = 5.00                # предупредит, если траты выше $5
+# hard_limit_usd: жёсткий лимит затрат (число в долларах)
 hard_limit_usd = 10.00               # полностью остановит при превышении $10
 
 # === Поведение ответов ===
+# concise_mode: заставляет давать короткие ответы (true/false)
 concise_mode = true                  # заставляет давать короткие и точные ответы
+# auto_format_output: автоматически форматировать Markdown (true/false)
 auto_format_output = false           # не форматировать лишний markdown, экономит токены
 
 # === Диагностика ===
+# verbose: включить подробный лог (true/false)
 verbose = false
+# log_level: уровень логирования (trace, debug, info, warn, error)
 log_level = "warn"
+
+# === Настройки trust level по каталогам ===
+# Пример:
+# [projects."/путь/к/каталогу"]
+# trust_level = "untrusted"  # варианты: trusted (не спрашивать), untrusted (всегда спрашивать)
