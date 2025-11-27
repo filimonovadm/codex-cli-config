@@ -1,6 +1,6 @@
 # === Основные настройки ===
-model = "gpt-5"
-model_reasoning_effort = "minimal"   # "minimal" — самый дешёвый режим рассуждения
+model = "gpt-5-codex"
+model_reasoning_effort = "medium"
 max_tokens = 600                     # ограничь длину ответа (~экономит 50–80%)
 temperature = 0.1                    # стабильно и без болтовни
 top_p = 1.0
